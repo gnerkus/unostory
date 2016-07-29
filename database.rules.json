@@ -1,0 +1,21 @@
+{"rules":
+ {
+   "chapters": {
+     "$uid": {
+       ".write": "auth !== null",
+       ".read": "$uid === auth.uid",
+       "$chapter": {
+         ".read": "data.child('uid').val() === auth.uid",
+         ".write": "data.child('uid').val() === auth.uid"
+       }
+     }
+   },
+
+   "settings": {
+     "$uid": {
+       ".write": "$uid === auth.uid",
+       ".read": "$uid === auth.uid"
+     }
+   }
+ }
+}

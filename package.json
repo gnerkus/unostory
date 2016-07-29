@@ -1,0 +1,24 @@
+{
+  "name": "scribe",
+  "version": "0.1.0",
+  "description": "Create immersive stories",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gnerkus/scribe.git"
+  },
+  "keywords": [
+    "writing",
+    "react",
+    "firebase"
+  ],
+  "author": "Ifeanyi Oraelosi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gnerkus/scribe/issues"
+  },
+  "homepage": "https://github.com/gnerkus/scribe#readme"
+}

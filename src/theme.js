@@ -1,7 +1,7 @@
 import {
-  blue500,
-  blue700,
-  amber300,
+  blueGrey700,
+  blueGrey800,
+  pink500,
   grey100,
   grey300,
   grey400,
@@ -15,17 +15,17 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 const MUITHEME = getMuiTheme({
   fontFamily: 'Roboto, sans-serif',
   palette: {
-    primary1Color: blue500,
-    primary2Color: blue700,
+    primary1Color: blueGrey700,
+    primary2Color: blueGrey800,
     primary3Color: grey400,
-    accent1Color: amber300,
+    accent1Color: pink500,
     accent2Color: grey100,
     accent3Color: grey500,
     textColor: darkBlack,
     alternateTextColor: white,
     canvasColor: white,
     borderColor: grey300,
-    pickerHeaderColor: blue500,
+    pickerHeaderColor: pink500,
     shadowColor: fullBlack,
   },
 });

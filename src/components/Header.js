@@ -20,7 +20,14 @@ import history from '../history';
 // The header is essentially the top navigation bar.
 class Header extends React.Component {
 
-  static propTypes {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false
+    };
+  }
+
+  static propTypes() {
     return {
       authStatus: PropTypes.string.isRequired,
       photoURL: PropTypes.string,
@@ -73,8 +80,8 @@ class Header extends React.Component {
         photo = (
           <IconButton>
             <Avatar icon={ <SocialPerson /> } />
-          </IconButton
-        )
+          </IconButton>
+        );
       }
     } else {
       photo = (
@@ -98,7 +105,7 @@ class Header extends React.Component {
 
     if (this.props.authStatus === C.LOGGED_IN) {
       content = (
-        <Drawer width={200} open={this.props.open}>
+        <Drawer width={200} open={this.state.open}>
           <AppBar title="Scribe" />
           <MenuItem
             onClick={ () => {
@@ -117,7 +124,7 @@ class Header extends React.Component {
     return (
       <IconButton
         tooltip="Nav menu"
-        onTouchTap={ this.handleToggle() }>
+        onTouchTap={ this.handleToggle.bind(this) }>
         <NavigationMenu />
       </IconButton>
     );

@@ -8,16 +8,12 @@ import CircularProgress from 'material-ui/CircularProgress';
 
 class App extends React.Component {
 
-  static propTypes {
+  static propTypes() {
     return {
       uid: PropTypes.string,
       authStatus: PropTypes.string.isRequired,
       userName: PropTypes.string
     };
-  }
-
-  componentDidUpdate() {
-    componentHandler.upgradeDom();
   }
 
   pageContent() {
@@ -26,8 +22,7 @@ class App extends React.Component {
       content = (
         <div>
           {
-            React.cloneElement({
-              this.props.children,
+            React.cloneElement(this.props.children, {
               key: this.props.location.pathname
             })
           }
@@ -40,19 +35,13 @@ class App extends React.Component {
 
   render() {
     let content = null;
-
     if (this.props.authStatus === C.LOGGING_IN) {
       content = <CircularProgress />;
     } else {
       content = (
         <div>
           <HeaderContainer
-            location={ this.props.location }
-            open={ false } />
-
-          <main>
-            { this.pageContent() }
-          </main>
+            location={ this.props.location } />
 
           <footer>
             Made with gusto by <a href="https://github.com/gnerkus">gnerkus</a>

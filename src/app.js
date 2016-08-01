@@ -1,5 +1,29 @@
 import React from 'react';
 
+import thunkMiddleware from 'redux-thunk';
+import { Provider } from 'react-redux';
+import { Router, Route, IndexRoute, Link, Redirect } from 'react-router';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { render } from 'react-dom';
+
+import AppContainer from './containers/AppContainer';
+
+import C from './constants';
+
+import auth from './auth';
+import history from './history';
+import rootReducer from './reducers/index';
+
+import {
+  fetchedChapters,
+  fetchedSettings,
+  listeningToAuth,
+  loadedData,
+  loadingData,
+  loginSuccess,
+  logout,
+} from './actions';
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MUITHEME from './theme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -7,17 +31,24 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
-// Simple AppBar to test project
-import AppBar from 'material-ui/AppBar';
+const store = applyMiddleware(thunkMiddleware)(createStore)(
+  rootReducer,
+  {},
+  window.devToolsExtension && window.devToolsExtension()
+);
 
-import { render } from 'react-dom';
+const routes = (
+  <Router history={ history }>
+    <Route path="/" component={ AppContainer }>
+    </Route>
+  </Router>
+);
 
 render(
   <MuiThemeProvider muiTheme={MUITHEME}>
-    <AppBar
-      title="Scribe"
-      iconClassNameRight="muidocs-icon-navigation-expand-more"
-    />
+    <Provider store={ store }>
+      { routes }
+    </Provider>
   </MuiThemeProvider>,
   document.body
 );

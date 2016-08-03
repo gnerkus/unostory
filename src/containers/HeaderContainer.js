@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => {
     location: ownProps.location,
     photoURL: state.auth.photoURL,
     userName: state.auth.userName,
-    email: state.auth.email
+    email: state.auth.email,
   };
 };
 
@@ -24,9 +24,9 @@ const mapDispatchToProps = dispatch => {
         dispatch(logout());
         location.reload();
       });
-    }
+    },
   };
-}
+};
 
 const HeaderContainer = connect(
   mapStateToProps,

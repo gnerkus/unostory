@@ -5,7 +5,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     ...ownProps,
     authStatus: state.auth.authStatus,
-    dataLoading: state.dataLoading
+    dataLoading: state.dataLoading,
   };
 };
 

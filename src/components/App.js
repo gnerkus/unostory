@@ -12,7 +12,7 @@ class App extends React.Component {
     return {
       uid: PropTypes.string,
       authStatus: PropTypes.string.isRequired,
-      userName: PropTypes.string
+      userName: PropTypes.string,
     };
   }
 
@@ -23,7 +23,7 @@ class App extends React.Component {
         <div>
           {
             React.cloneElement(this.props.children, {
-              key: this.props.location.pathname
+              key: this.props.location.pathname,
             })
           }
         </div>
@@ -41,7 +41,8 @@ class App extends React.Component {
       content = (
         <div>
           <HeaderContainer
-            location={ this.props.location } />
+            location={this.props.location}
+          />
 
           <footer>
             Made with gusto by <a href="https://github.com/gnerkus">gnerkus</a>

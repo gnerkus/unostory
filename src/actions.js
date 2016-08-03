@@ -1,5 +1,3 @@
-import firebase from 'firebase';
-
 import C from './constants';
 import history from './history';
 
@@ -7,7 +5,7 @@ import history from './history';
 // Subscribe to changes in the user's authentication state
 export const listeningToAuth = () => {
   return {
-    type: C.LISTENING_TO_AUTH
+    type: C.LISTENING_TO_AUTH,
   };
 };
 
@@ -17,7 +15,7 @@ export const loginRequest = (method = 'google', nextPath = '/') => {
   return {
     type: C.LOGIN_REQUEST,
     method,
-    nextPath
+    nextPath,
   };
 };
 
@@ -28,7 +26,7 @@ export const loginSuccess = (user, nextPath = '/') => {
   return {
     type: C.LOGIN_SUCCESS,
     user,
-    nextPath
+    nextPath,
   };
 };
 
@@ -38,7 +36,7 @@ export const logout = (nextPath = '/') => {
   history.push(nextPath);
   return {
     type: C.LOGOUT,
-    nextPath
+    nextPath,
   };
 };
 
@@ -58,13 +56,28 @@ export const startListeningToAuth = () => {
   };
 };
 
+// Chapter action creator
+// `chapters` ref fetched successfully
+export const fetchedChapters = (chapters) => {
+  return {
+    type: C.FETCHED_CHAPTERS,
+    chapters,
+  };
+};
+
 // Subscribe to changes in the `chapters` ref.
 export const startListeningToChapters = () => {
+  let listenAction = null;
   if (C.FIREBASE.auth().currentUser) {
     const uid = C.FIREBASE.auth().currentUser.uid;
-    return (dispatch, getState) => {
-      let chaptersRef = C.FIREBASE.app().database().ref('chapters').equalTo('uid', uid);
-      // Whenever the `chapters` ref changes, send an action to the app's state along with the `chapters` ref.
+    listenAction = (dispatch) => {
+      const chaptersRef = C.FIREBASE.app()
+                                    .database()
+                                    .ref('chapters')
+                                    .equalTo('uid', uid);
+
+      // Whenever the `chapters` ref changes, send an action to the
+      // app's state along with the `chapters` ref.
       chaptersRef.on('value', snapshot => {
         console.log(snapshot.val());
         dispatch(fetchedChapters(snapshot.val()));
@@ -74,19 +87,12 @@ export const startListeningToChapters = () => {
       });
     };
   } else {
-    return (dispatch, getState) => {
+    listenAction = (dispatch) => {
       dispatch(logout());
     };
   }
-};
 
-// Chapter action creator
-// `chapters` ref fetched successfully
-export const fetchedChapters = (chapters) => {
-  return {
-    type: C.FETCHED_CHAPTERS,
-    chapters
-  };
+  return listenAction;
 };
 
 // Chapter action creator
@@ -94,7 +100,7 @@ export const fetchedChapters = (chapters) => {
 export const createNewChapter = (chapterDetails) => {
   return {
     type: C.CREATING_NEW_CHAPTER,
-    chapterDetails: chapterDetails
+    chapterDetails,
   };
 };
 
@@ -103,7 +109,7 @@ export const createNewChapter = (chapterDetails) => {
 export const removeChapter = chapterId => {
   return {
     type: C.REMOVE_CHAPTER,
-    chapterId
+    chapterId,
   };
 };
 
@@ -112,7 +118,7 @@ export const removeChapter = chapterId => {
 export const createNewChapterSuccess = (chapterData) => {
   return {
     type: C.CREATE_NEW_CHAPTER_SUCCESS,
-    chapterData: chapterData
+    chapterData,
   };
 };
 
@@ -121,7 +127,7 @@ export const createNewChapterSuccess = (chapterData) => {
 export const createNewChapterFailed = (error) => {
   return {
     type: C.CREATE_NEW_CHAPTER_FAILED,
-    error
+    error,
   };
 };
 
@@ -132,7 +138,7 @@ export const updateChapterValue = (chapterId, field, value) => {
     type: C.UPDATE_CHAPTER_VALUE,
     chapterId,
     field,
-    value
+    value,
   };
 };
 
@@ -143,7 +149,7 @@ export const updateCurrentChapterValue = (field, value) => {
   return {
     type: C.UPDATE_CURRENT_CHAPTER_VALUE,
     field,
-    value
+    value,
   };
 };
 
@@ -154,18 +160,18 @@ export const toggleEditing = (chapterId, field) => {
   return {
     type: C.TOGGLE_EDITING_FIELD,
     chapterId,
-    field
+    field,
   };
 };
 
 // Dialog actions.
 export const showDialog = ({
-  dialogType='info',
+  dialogType = 'info',
   noAction = null,
   noText = 'No',
   text,
   yesAction,
-  yesText = 'Yes'
+  yesText = 'Yes',
 }) => {
   return {
     dialogType,
@@ -174,14 +180,14 @@ export const showDialog = ({
     text,
     type: C.SHOW_DIALOG,
     yesAction,
-    yesText
+    yesText,
   };
 };
 
 // Action creator
 export const clearDialog = () => {
   return {
-    type: C.CLEAR_DIALOG
+    type: C.CLEAR_DIALOG,
   };
 };
 
@@ -189,17 +195,17 @@ export const clearDialog = () => {
 // Data loading.
 export const loadingData = () => {
   return {
-    type: C.LOADING_DATA
+    type: C.LOADING_DATA,
   };
-}
+};
 
 // Action creator
 // Loaded data successfully
 export const loadedData = () => {
   return {
-    type: C.LOADED_DATA
+    type: C.LOADED_DATA,
   };
-}
+};
 
 // Action creator
 // Updated settings
@@ -207,15 +213,15 @@ export const updateSetting = (setting, value) => {
   return {
     type: C.UPDATE_SETTING,
     setting,
-    value
+    value,
   };
-}
+};
 
 // Action creator
 // Fetched settings
 export const fetchedSettings = settings => {
   return {
     type: C.FETCHED_SETTINGS,
-    settings
+    settings,
   };
-}
+};

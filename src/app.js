@@ -38,16 +38,15 @@ const store = applyMiddleware(thunkMiddleware)(createStore)(
 );
 
 const routes = (
-  <Router history={ history }>
-    <Route path="/" component={ AppContainer }>
-    </Route>
+  <Router history={history}>
+    <Route path="/" component={AppContainer} />
   </Router>
 );
 
 render(
   <MuiThemeProvider muiTheme={MUITHEME}>
-    <Provider store={ store }>
-      { routes }
+    <Provider store={store}>
+      {routes}
     </Provider>
   </MuiThemeProvider>,
   document.body

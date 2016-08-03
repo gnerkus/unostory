@@ -20,19 +20,19 @@ import history from '../history';
 // The header is essentially the top navigation bar.
 class Header extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false
-    };
-  }
-
   static propTypes() {
     return {
       authStatus: PropTypes.string.isRequired,
       photoURL: PropTypes.string,
       userName: PropTypes.string,
       open: PropTypes.bool,
+    };
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
     };
   }
 
@@ -43,20 +43,23 @@ class Header extends React.Component {
     if (this.props.authStatus === C.LOGGED_IN) {
       content = (
         <IconMenu
-          iconButtonElement={this.profilePhoto()} // user's profile picture
-          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-          targetOrigin={{horizontal: 'left', vertical: 'bottom'}}
+          iconButtonElement={this.profilePhoto()}
+          anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+          targetOrigin={{ horizontal: 'left', vertical: 'bottom' }}
         >
           <MenuItem
-            primaryText={ this.props.userName ? this.props.userName : this.props.email } />
+            primaryText={this.props.userName ? this.props.userName : this.props.email}
+          />
           <MenuItem
-            onClick={ () => {
-              history.push('/settings')
-            } }
-            primaryText="Settings" />
+            onClick={() => {
+              history.push('/settings');
+            }}
+            primaryText="Settings"
+          />
           <MenuItem
-            onClick={ this.props.logout }
-            primaryText="Logout" />
+            onClick={this.props.logout}
+            primaryText="Logout"
+          />
         </IconMenu>
       );
     }
@@ -73,27 +76,27 @@ class Header extends React.Component {
       if (this.props.photoURL && this.props.photoURL !== '') {
         photo = (
           <IconButton>
-            <Avatar src={ this.props.photoURL }/>
+            <Avatar src={this.props.photoURL} />
           </IconButton>
-        )
+        );
       } else {
         photo = (
           <IconButton>
-            <Avatar icon={ <SocialPerson /> } />
+            <Avatar icon={<SocialPerson />} />
           </IconButton>
         );
       }
     } else {
       photo = (
         <a
-          onClick={ (e) => {
+          onClick={(e) => {
             e.preventDefault();
-            history.push('/')
+            history.push('/');
           }}
         >
           Scribe
         </a>
-      )
+      );
     }
 
     return photo;
@@ -108,10 +111,11 @@ class Header extends React.Component {
         <Drawer width={200} open={this.state.open}>
           <AppBar title="Scribe" />
           <MenuItem
-            onClick={ () => {
-              history.push('/')
-            } }
-            primaryText="Chapters" />
+            onClick={() => {
+              history.push('/');
+            }}
+            primaryText="Chapters"
+          />
         </Drawer>
       );
     }
@@ -124,21 +128,22 @@ class Header extends React.Component {
     return (
       <IconButton
         tooltip="Nav menu"
-        onTouchTap={ this.handleToggle.bind(this) }>
+        onTouchTap={this.handleToggle.bind(this)}
+      >
         <NavigationMenu />
       </IconButton>
     );
   }
 
   handleToggle() {
-    this.setState({open: !this.state.open});
+    this.setState({ open: !this.state.open });
   }
 
   // Floating action button at the bottom right of the screen
   // This enables the user create a new chapter.
   newChapterBtn() {
     let content = null;
-    let location = this.props.location;
+    const location = this.props.location;
 
     const style = {
       margin: 0,
@@ -155,7 +160,7 @@ class Header extends React.Component {
           <FloatingActionButton
             secondary={true}
             style={style}
-            onClick ={ (e) => {
+            onClick ={(e) => {
               e.preventDefault();
               history.push('/new');
             }}
@@ -174,9 +179,10 @@ class Header extends React.Component {
       <div>
         <AppBar
           title="Scribe"
-          iconElementLeft={ this.navBtn() }
-          iconElementRight={ this.userMenu() } />
-        { this.navigationMenu() }
+          iconElementLeft={this.navBtn()}
+          iconElementRight={this.userMenu()}
+        />
+        {this.navigationMenu()}
       </div>
     );
   }

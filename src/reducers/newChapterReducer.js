@@ -7,36 +7,32 @@ const initialState = {
   content: null,
 
   // Chapter monitor.
-  status: C.CHAPTER_UNSAVED
+  status: C.CHAPTER_UNSAVED,
 };
 
 const newChapterReducer = (currentState = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
 
     case C.CREATING_NEW_CHAPTER:
       return {
         ...currentState,
-        status: C.CHAPTER_PENDING
+        status: C.CHAPTER_PENDING,
       };
-      break;
 
     case C.CREATE_NEW_CHAPTER_SUCCESS:
       return initialState;
-      break;
 
     case C.CREATE_NEW_CHAPTER_FAILED:
       return {
         ...currentState,
-        status: C.CHAPTER_UNSAVED
+        status: C.CHAPTER_UNSAVED,
       };
-      break;
 
     case C.UPDATE_CURRENT_CHAPTER_VALUE:
       return {
         ...currentState,
-        [action.field]: action.value
+        [action.field]: action.value,
       };
-      break;
 
     default:
       return currentState;

@@ -8,26 +8,23 @@ const initialState = {
   listeningToAuth: false,
   photoURL: null,
   uid: null,
-  userName: null
+  userName: null,
 };
 
 const authReducer = (currentState = initialState, action) => {
-
-  switch(action.type) {
+  switch (action.type) {
 
     case C.LISTENING_TO_AUTH:
       return {
         ...currentState,
-        listeningToAuth: true
+        listeningToAuth: true,
       };
-      break;
 
     case C.LOGIN_REQUEST:
       return {
         ...currentState,
-        authStatus: C.LOGGING_IN
+        authStatus: C.LOGGING_IN,
       };
-      break;
 
     case C.LOGIN_SUCCESS:
       return {
@@ -36,9 +33,8 @@ const authReducer = (currentState = initialState, action) => {
         uid: action.user.uid,
         photoURL: action.user.photoURL,
         userName: action.user.displayName,
-        email: action.user.email
+        email: action.user.email,
       };
-      break;
 
     case C.LOGOUT:
       return {
@@ -47,10 +43,8 @@ const authReducer = (currentState = initialState, action) => {
         uid: null,
         userName: null,
         photoURL: null,
-        userName: null,
-        email: null
+        email: null,
       };
-      break;
 
     default:
       return currentState;

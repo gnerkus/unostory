@@ -3,12 +3,14 @@ import C from '../constants';
 const initialState = {};
 
 const editingFieldReducer = (currentState = initialState, action) => {
-  switch(action.type) {
+  let editing = C.FIELD_STATUS_EDITING;
+  const editingFields = currentState;
+  let chapterFields = null;
+
+  switch (action.type) {
 
     case C.TOGGLE_EDITING_FIELD:
-      let editing = C.FIELD_STATUS_EDITING;
-      let roastFields = {};
-      let editingFields = currentState;
+
 
       if (editingFields.hasOwnProperty(action.chapterId)) {
         chapterFields = editingFields[action.chapterId];
@@ -25,14 +27,12 @@ const editingFieldReducer = (currentState = initialState, action) => {
         ...currentState,
         [action.chapterId]: {
           ...chapterFields,
-          [action.field]: editing
-        }
+          [action.field]: editing,
+        },
       };
-      break;
 
     default:
       return currentState;
-      break;
   }
 };
 

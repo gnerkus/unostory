@@ -7,12 +7,11 @@ const initialState = {
   noAction: null,
   yesText: null,
   noText: null,
-  dialogType: null
+  dialogType: null,
 };
 
 const dialogReducer = (currentState = initialState, action) => {
-
-  switch(action.type) {
+  switch (action.type) {
     case C.SHOW_DIALOG:
       return {
         dialogType: action.dialogType,
@@ -22,16 +21,13 @@ const dialogReducer = (currentState = initialState, action) => {
         yesAction: action.yesAction,
         yesText: action.yesText || 'Yes'
       };
-      break;
 
     case C.CLEAR_DIALOG:
       return initialState;
-      break;
 
     default:
       return initialState;
-      break;
   }
-}
+};
 
 export default dialogReducer;

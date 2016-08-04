@@ -5,6 +5,7 @@ import Drawer from 'material-ui/Drawer';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 
+import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import IconButton from 'material-ui/IconButton/IconButton';
 import Avatar from 'material-ui/Avatar';
@@ -26,6 +27,8 @@ class Header extends React.Component {
       photoURL: PropTypes.string,
       userName: PropTypes.string,
       open: PropTypes.bool,
+      location: PropTypes.string,
+      email: PropTypes.string,
     };
   }
 
@@ -62,6 +65,17 @@ class Header extends React.Component {
           />
         </IconMenu>
       );
+    } else if (this.props.location.pathname !== '/login') {
+      content = (
+        <RaisedButton
+          label="Sign in"
+          secondary={true}
+          onClick={(e) => {
+            e.preventDefault();
+            history.push('/login');
+          }}
+        />
+      );
     }
 
     return content;
@@ -86,17 +100,6 @@ class Header extends React.Component {
           </IconButton>
         );
       }
-    } else {
-      photo = (
-        <a
-          onClick={(e) => {
-            e.preventDefault();
-            history.push('/');
-          }}
-        >
-          Scribe
-        </a>
-      );
     }
 
     return photo;
@@ -109,7 +112,10 @@ class Header extends React.Component {
     if (this.props.authStatus === C.LOGGED_IN) {
       content = (
         <Drawer width={200} open={this.state.open}>
-          <AppBar title="Scribe" />
+          <AppBar
+            title="Scribe"
+            onTouchTap={this.handleToggle.bind(this)}
+          />
           <MenuItem
             onClick={() => {
               history.push('/');
@@ -181,8 +187,10 @@ class Header extends React.Component {
           title="Scribe"
           iconElementLeft={this.navBtn()}
           iconElementRight={this.userMenu()}
+          zDepth="0"
         />
         {this.navigationMenu()}
+        {this.newChapterBtn()}
       </div>
     );
   }

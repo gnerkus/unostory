@@ -1,9 +1,8 @@
 import C from '../constants';
-import history from '../history';
 
 const initialState = {
   authProvider: null,
-  authStatus: C.LOGGING_IN,
+  authStatus: C.LOGGED_OUT,
   email: null,
   listeningToAuth: false,
   photoURL: null,

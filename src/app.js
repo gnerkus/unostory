@@ -2,27 +2,18 @@ import React from 'react';
 
 import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute, Link, Redirect } from 'react-router';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { Router, Route, IndexRoute } from 'react-router';
+import { createStore, applyMiddleware } from 'redux';
 import { render } from 'react-dom';
 
 import AppContainer from './containers/AppContainer';
+import MainContainer from './containers/MainContainer';
+import LoginFormContainer from './containers/LoginFormContainer';
 
-import C from './constants';
-
-import auth from './auth';
 import history from './history';
 import rootReducer from './reducers/index';
 
-import {
-  fetchedChapters,
-  fetchedSettings,
-  listeningToAuth,
-  loadedData,
-  loadingData,
-  loginSuccess,
-  logout,
-} from './actions';
+import { startListeningToAuth } from './actions';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MUITHEME from './theme';
@@ -39,7 +30,11 @@ const store = applyMiddleware(thunkMiddleware)(createStore)(
 
 const routes = (
   <Router history={history}>
-    <Route path="/" component={AppContainer} />
+    <Route path="/" component={AppContainer}>
+      <IndexRoute component={MainContainer} />
+
+      <Route path="login" component={LoginFormContainer} />
+    </Route>
   </Router>
 );
 
@@ -51,3 +46,5 @@ render(
   </MuiThemeProvider>,
   document.body
 );
+
+startListeningToAuth()(store.dispatch);

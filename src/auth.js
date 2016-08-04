@@ -1,4 +1,4 @@
-import { browserHistory } from 'react-router';
+import firebase from 'firebase';
 import C from './constants';
 
 const auth = {
@@ -23,10 +23,10 @@ const auth = {
         break;
     }
 
-    if (window.location.protocol === 'http') {
-      return C.FIREBASE.auth().signInWithPopup(authProvider);
+    if (window.location.protocol === 'http:') {
+      C.FIREBASE.auth().signInWithPopup(authProvider);
     } else {
-      return C.FIREBASE.auth().signInWithRedirect(authProvider);
+      C.FIREBASE.auth().signInWithRedirect(authProvider);
     }
   },
 
@@ -38,11 +38,11 @@ const auth = {
     if (!C.FIREBASE.auth().currentUser) {
       replace({
         pathname: '/',
-        state: { nextPathname: nextState.location.pathname }
+        state: { nextPathname: nextState.location.pathname },
       });
     }
     cb();
-  }
+  },
 };
 
 export default auth;

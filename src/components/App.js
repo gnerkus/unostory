@@ -6,6 +6,26 @@ import HeaderContainer from '../containers/HeaderContainer';
 
 import CircularProgress from 'material-ui/CircularProgress';
 
+import { grey100 } from 'material-ui/styles/colors';
+
+const appStyle = {
+  backgroundColor: grey100,
+};
+
+const spinnerStyle = {
+  margin: 'auto',
+};
+
+const containerStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexDirection: 'column',
+  height: 620,
+  padding: 0,
+  margin: 0,
+};
+
 class App extends React.Component {
 
   static propTypes() {
@@ -13,11 +33,17 @@ class App extends React.Component {
       uid: PropTypes.string,
       authStatus: PropTypes.string.isRequired,
       userName: PropTypes.string,
+      location: PropTypes.string,
+      dataLoading: PropTypes.bool,
     };
   }
 
   pageContent() {
-    let content = <CircularProgress />;
+    let content = (
+      <div style={containerStyle}>
+        <CircularProgress style={spinnerStyle} />
+      </div>
+    );
     if (!this.props.dataLoading) {
       content = (
         <div>
@@ -36,13 +62,21 @@ class App extends React.Component {
   render() {
     let content = null;
     if (this.props.authStatus === C.LOGGING_IN) {
-      content = <CircularProgress />;
+      content = (
+        <div style={containerStyle}>
+          <CircularProgress style={spinnerStyle} />
+        </div>
+      );
     } else {
       content = (
-        <div>
+        <div style={appStyle}>
           <HeaderContainer
             location={this.props.location}
           />
+
+          <main>
+            {this.pageContent()}
+          </main>
 
           <footer>
             Made with gusto by <a href="https://github.com/gnerkus">gnerkus</a>

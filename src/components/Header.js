@@ -5,7 +5,7 @@ import Drawer from 'material-ui/Drawer';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 
-import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import IconButton from 'material-ui/IconButton/IconButton';
 import Avatar from 'material-ui/Avatar';
@@ -14,8 +14,15 @@ import SocialPerson from 'material-ui/svg-icons/social/person';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 
+import { grey300 } from 'material-ui/styles/colors';
+
 import C from '../constants';
 import history from '../history';
+
+const appBarStyle = {
+  borderBottom: '1px solid',
+  borderBottomColor: grey300,
+};
 
 // Header component for the application.
 // The header is essentially the top navigation bar.
@@ -52,6 +59,7 @@ class Header extends React.Component {
         >
           <MenuItem
             primaryText={this.props.userName ? this.props.userName : this.props.email}
+            disabled
           />
           <MenuItem
             onClick={() => {
@@ -67,9 +75,9 @@ class Header extends React.Component {
       );
     } else if (this.props.location.pathname !== '/login') {
       content = (
-        <RaisedButton
+        <FlatButton
           label="Sign in"
-          secondary={true}
+          secondary
           onClick={(e) => {
             e.preventDefault();
             history.push('/login');
@@ -113,7 +121,7 @@ class Header extends React.Component {
       content = (
         <Drawer width={200} open={this.state.open}>
           <AppBar
-            title="Scribe"
+            title="UnoStory"
             onTouchTap={this.handleToggle.bind(this)}
           />
           <MenuItem
@@ -164,9 +172,9 @@ class Header extends React.Component {
       content = (
         <div>
           <FloatingActionButton
-            secondary={true}
+            secondary
             style={style}
-            onClick ={(e) => {
+            onClick={(e) => {
               e.preventDefault();
               history.push('/new');
             }}
@@ -184,7 +192,8 @@ class Header extends React.Component {
     return (
       <div>
         <AppBar
-          title="Scribe"
+          title="UnoStory"
+          style={appBarStyle}
           iconElementLeft={this.navBtn()}
           iconElementRight={this.userMenu()}
           zDepth="0"

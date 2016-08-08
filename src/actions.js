@@ -82,17 +82,17 @@ export const startListeningToChapters = (user) => {
     const chaptersRef = C.FIREBASE.app()
                                   .database()
                                   .ref('chapters')
-                                  .equalTo('uid', user.uid);
+                                  .equalTo('uid', user.uid)
+                                  .ref;
 
     // Whenever the `chapters` ref changes, send an action to the
     // app's state along with the `chapters` ref.
     chaptersRef.on('value', snapshot => {
-      console.log(snapshot.val());
       dispatch(loadedData());
       dispatch(fetchedChapters(snapshot.val()));
     }, err => {
       // TODO: better error handling
-      console.log(err);
+      throw err;
     });
   };
 
@@ -105,17 +105,17 @@ export const startListeningToSettings = (user) => {
     const settingsRef = C.FIREBASE.app()
                                   .database()
                                   .ref('settings')
-                                  .equalTo('uid', user.uid);
+                                  .equalTo('uid', user.uid)
+                                  .ref;
 
     // Whenever the `settings` ref changes, send an action to the
     // app's state along with the `settings` ref.
     settingsRef.on('value', snapshot => {
-      console.log(snapshot.val());
       dispatch(loadedData());
       dispatch(fetchedSettings(snapshot.val()));
     }, err => {
       // TODO: better error handling
-      console.log(err);
+      throw err;
     });
   };
 

@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import { logout } from '../actions';
-import { history } from '../history';
 
 import C from '../constants';
 
@@ -18,7 +17,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     logout: e => {
-      console.log(e);
       e.preventDefault();
       C.FIREBASE.auth().signOut().then(() => {
         dispatch(logout());

@@ -27,19 +27,19 @@ const LoginForm = ({ authStatus, onLoginBtnClick }) => {
   if (authStatus !== C.LOGGED_IN) {
     content = (
       <div style={containerStyle}>
-      <Card style={formStyle}>
-        <CardTitle title="Sign in" />
-        <CardActions>
-          <RaisedButton
-            label="Sign in with Google"
-            labelColor="#FFF"
-            backgroundColor={red500}
-            onClick={
-              (e) => onLoginBtnClick(e, 'google')
-            }
-          />
-        </CardActions>
-      </Card>
+        <Card style={formStyle}>
+          <CardTitle title="Social Sign in" />
+          <CardActions>
+            <RaisedButton
+              label="Sign in with Google"
+              labelColor="#FFF"
+              backgroundColor={red500}
+              onClick={
+                (e) => onLoginBtnClick(e, 'google')
+              }
+            />
+          </CardActions>
+        </Card>
       </div>
     );
   }

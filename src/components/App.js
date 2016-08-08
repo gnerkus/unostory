@@ -6,12 +6,6 @@ import HeaderContainer from '../containers/HeaderContainer';
 
 import CircularProgress from 'material-ui/CircularProgress';
 
-import { grey100 } from 'material-ui/styles/colors';
-
-const appStyle = {
-  backgroundColor: grey100,
-};
-
 const spinnerStyle = {
   margin: 'auto',
 };
@@ -69,7 +63,7 @@ class App extends React.Component {
       );
     } else {
       content = (
-        <div style={appStyle}>
+        <div>
           <HeaderContainer
             location={this.props.location}
           />

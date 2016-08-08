@@ -9,9 +9,11 @@ import { render } from 'react-dom';
 import AppContainer from './containers/AppContainer';
 import MainContainer from './containers/MainContainer';
 import LoginFormContainer from './containers/LoginFormContainer';
+import NewChapterFormContainer from './containers/NewChapterFormContainer';
 
 import history from './history';
 import rootReducer from './reducers/index';
+import auth from './auth';
 
 import { startListeningToAuth } from './actions';
 
@@ -34,6 +36,12 @@ const routes = (
       <IndexRoute component={MainContainer} />
 
       <Route path="login" component={LoginFormContainer} />
+
+      <Route
+        path="new"
+        component={NewChapterFormContainer}
+        onEnter={auth.checkAuth}
+      />
     </Route>
   </Router>
 );

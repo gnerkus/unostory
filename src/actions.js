@@ -1,3 +1,7 @@
+/**
+ * Application's actions
+ */
+
 import C from './constants';
 import history from './history';
 
@@ -37,6 +41,14 @@ export const logout = (nextPath = '/') => {
   return {
     type: C.LOGOUT,
     nextPath,
+  };
+};
+
+// Action creator
+// Loading data for the application
+export const loadingData = () => {
+  return {
+    type: C.LOADING_DATA,
   };
 };
 
@@ -85,11 +97,14 @@ export const startListeningToChapters = (user) => {
                                   .equalTo('uid', user.uid)
                                   .ref;
 
+    // Update app's state to reflect data loading
+    dispatch(loadingData());
+
     // Whenever the `chapters` ref changes, send an action to the
     // app's state along with the `chapters` ref.
     chaptersRef.on('value', snapshot => {
-      dispatch(loadedData());
       dispatch(fetchedChapters(snapshot.val()));
+      dispatch(loadedData());
     }, err => {
       // TODO: better error handling
       throw err;
@@ -111,8 +126,8 @@ export const startListeningToSettings = (user) => {
     // Whenever the `settings` ref changes, send an action to the
     // app's state along with the `settings` ref.
     settingsRef.on('value', snapshot => {
-      dispatch(loadedData());
       dispatch(fetchedSettings(snapshot.val()));
+      dispatch(loadedData());
     }, err => {
       // TODO: better error handling
       throw err;
@@ -132,8 +147,8 @@ export const startListeningToAuth = () => {
       // If logged in.
       if (user) {
         dispatch(loginSuccess(user));
-        startListeningToChapters(user);
-        startListeningToSettings(user);
+        dispatch(startListeningToChapters(user));
+        dispatch(startListeningToSettings(user));
       } else {
         C.FIREBASE.auth().getRedirectResult().then(function (result) {
           if (!result.user) {
@@ -240,13 +255,5 @@ export const showDialog = ({
 export const clearDialog = () => {
   return {
     type: C.CLEAR_DIALOG,
-  };
-};
-
-// Action creator
-// Data loading.
-export const loadingData = () => {
-  return {
-    type: C.LOADING_DATA,
   };
 };

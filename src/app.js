@@ -2,7 +2,7 @@ import React from 'react';
 
 import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute } from 'react-router';
+import { Router, Route, IndexRoute, Redirect } from 'react-router';
 import { createStore, applyMiddleware } from 'redux';
 import { render } from 'react-dom';
 
@@ -10,6 +10,7 @@ import AppContainer from './containers/AppContainer';
 import MainContainer from './containers/MainContainer';
 import LoginFormContainer from './containers/LoginFormContainer';
 import NewChapterFormContainer from './containers/NewChapterFormContainer';
+import ChapterContainer from './containers/ChapterContainer';
 
 import history from './history';
 import rootReducer from './reducers/index';
@@ -40,6 +41,18 @@ const routes = (
       <Route
         path="new"
         component={NewChapterFormContainer}
+        onEnter={auth.checkAuth}
+      />
+
+      <Redirect
+        from="chapters"
+        to="/"
+        onEnter={auth.checkAuth}
+      />
+
+      <Route
+        path="chapters/:chapterId"
+        component={ChapterContainer}
         onEnter={auth.checkAuth}
       />
     </Route>

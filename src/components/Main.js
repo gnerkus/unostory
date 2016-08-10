@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import C from '../constants';
+import ChapterListContainer from '../containers/ChapterListContainer';
 import Home from './Home';
 
 class Main extends React.Component {
@@ -15,7 +16,7 @@ class Main extends React.Component {
 
     if (this.props.authStatus === C.LOGGED_IN) {
       content = (
-        <div>List of chapters here</div>
+        <ChapterListContainer />
       );
     } else {
       content = (

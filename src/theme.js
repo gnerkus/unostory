@@ -24,6 +24,7 @@ const MUITHEME = getMuiTheme({
   toolbar: {
     color: deepPurple500,
     backgroundColor: white,
+    titleFontWeight: typography.fontWeightLight,
   },
   spacing,
   fontFamily: 'Roboto, sans-serif',

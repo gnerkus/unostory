@@ -1,27 +1,34 @@
+/**
+ * Displays the app bar and action buttons contained within.
+ * Also displays the 'Add Chapter' FAB (Floating Action Button)
+ */
+
 import React, { PropTypes } from 'react';
 
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
+import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 
 import FlatButton from 'material-ui/FlatButton';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
 import IconButton from 'material-ui/IconButton/IconButton';
 import Avatar from 'material-ui/Avatar';
 
 import SocialPerson from 'material-ui/svg-icons/social/person';
-import ContentAdd from 'material-ui/svg-icons/content/add';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 
-import { grey300 } from 'material-ui/styles/colors';
+import { grey300, darkBlack } from 'material-ui/styles/colors';
 
 import C from '../constants';
 import history from '../history';
 
-const appBarStyle = {
+const toolbarStyle = {
   borderBottom: '1px solid',
   borderBottomColor: grey300,
+};
+
+const titleStyle = {
+  color: darkBlack,
+  fontWeight: 'normal',
 };
 
 // Header component for the application.
@@ -36,6 +43,7 @@ class Header extends React.Component {
       open: PropTypes.bool,
       location: PropTypes.string,
       email: PropTypes.string,
+      logout: PropTypes.func,
     };
   }
 
@@ -52,26 +60,28 @@ class Header extends React.Component {
 
     if (this.props.authStatus === C.LOGGED_IN) {
       content = (
-        <IconMenu
-          iconButtonElement={this.profilePhoto()}
-          anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-          targetOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-        >
-          <MenuItem
-            primaryText={this.props.userName ? this.props.userName : this.props.email}
-            disabled
-          />
-          <MenuItem
-            onClick={() => {
-              history.push('/settings');
-            }}
-            primaryText="Settings"
-          />
-          <MenuItem
-            onClick={this.props.logout}
-            primaryText="Logout"
-          />
-        </IconMenu>
+        <div>
+          <IconMenu
+            iconButtonElement={this.profilePhoto()}
+            anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+            targetOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+          >
+            <MenuItem
+              primaryText={this.props.userName ? this.props.userName : this.props.email}
+              disabled
+            />
+            <MenuItem
+              onClick={() => {
+                history.push('/settings');
+              }}
+              primaryText="Settings"
+            />
+            <MenuItem
+              onClick={this.props.logout}
+              primaryText="Logout"
+            />
+          </IconMenu>
+        </div>
       );
     } else if (this.props.location.pathname !== '/login') {
       content = (
@@ -113,30 +123,6 @@ class Header extends React.Component {
     return photo;
   }
 
-  // Generate a side navigation menu
-  navigationMenu() {
-    let content = null;
-
-    if (this.props.authStatus === C.LOGGED_IN) {
-      content = (
-        <Drawer width={200} open={this.state.open}>
-          <AppBar
-            title="UnoStory"
-            onTouchTap={this.handleToggle.bind(this)}
-          />
-          <MenuItem
-            onClick={() => {
-              history.push('/');
-            }}
-            primaryText="Chapters"
-          />
-        </Drawer>
-      );
-    }
-
-    return content;
-  }
-
   // Generate a menu button. This is used to open the side navigation.
   navBtn() {
     return (
@@ -157,31 +143,17 @@ class Header extends React.Component {
   // This enables the user create a new chapter.
   newChapterBtn() {
     let content = null;
-    const location = this.props.location;
-
-    const style = {
-      margin: 0,
-      top: 'auto',
-      right: 20,
-      bottom: 20,
-      left: 'auto',
-      position: 'fixed',
-    };
 
     if (this.props.authStatus === C.LOGGED_IN) {
       content = (
-        <div>
-          <FloatingActionButton
-            secondary
-            style={style}
-            onClick={(e) => {
-              e.preventDefault();
-              history.push('/new');
-            }}
-          >
-            <ContentAdd />
-          </FloatingActionButton>
-        </div>
+        <FlatButton
+          label="New chapter"
+          secondary
+          onClick={(e) => {
+            e.preventDefault();
+            history.push('/new');
+          }}
+        />
       );
     }
 
@@ -190,17 +162,25 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div>
-        <AppBar
-          title="UnoStory"
-          style={appBarStyle}
-          iconElementLeft={this.navBtn()}
-          iconElementRight={this.userMenu()}
-          zDepth="0"
-        />
-        {this.navigationMenu()}
-        {this.newChapterBtn()}
-      </div>
+      <Toolbar
+        style={toolbarStyle}
+        zDepth="0"
+      >
+        <ToolbarGroup>
+          <ToolbarTitle
+            text="UnoStory"
+            style={titleStyle}
+            onClick={(e) => {
+              e.preventDefault();
+              history.push('/');
+            }}
+          />
+        </ToolbarGroup>
+        <ToolbarGroup>
+          {this.newChapterBtn()}
+          {this.userMenu()}
+        </ToolbarGroup>
+      </Toolbar>
     );
   }
 }

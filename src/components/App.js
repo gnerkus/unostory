@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
-import { Link, browserHistory } from 'react-router';
 
 import C from '../constants';
 import HeaderContainer from '../containers/HeaderContainer';
 
 import CircularProgress from 'material-ui/CircularProgress';
+import { deepPurple500 } from 'material-ui/styles/colors';
 
 const spinnerStyle = {
   margin: 'auto',
@@ -29,13 +29,17 @@ class App extends React.Component {
       userName: PropTypes.string,
       location: PropTypes.string,
       dataLoading: PropTypes.bool,
+      children: PropTypes.object,
     };
   }
 
   pageContent() {
     let content = (
       <div style={containerStyle}>
-        <CircularProgress style={spinnerStyle} />
+        <CircularProgress
+          style={spinnerStyle}
+          color={deepPurple500}
+        />
       </div>
     );
     if (!this.props.dataLoading) {
@@ -58,7 +62,10 @@ class App extends React.Component {
     if (this.props.authStatus === C.LOGGING_IN) {
       content = (
         <div style={containerStyle}>
-          <CircularProgress style={spinnerStyle} />
+          <CircularProgress
+            style={spinnerStyle}
+            color={deepPurple500}
+          />
         </div>
       );
     } else {

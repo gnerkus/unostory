@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 
 import C from '../constants';
 import HeaderContainer from '../containers/HeaderContainer';
+import DialogContainer from '../containers/DialogContainer';
 
 import CircularProgress from 'material-ui/CircularProgress';
 import { deepPurple500 } from 'material-ui/styles/colors';
@@ -82,6 +83,8 @@ class App extends React.Component {
           <footer>
             Made with gusto by <a href="https://github.com/gnerkus">gnerkus</a>
           </footer>
+
+          <DialogContainer />
         </div>
       );
     }

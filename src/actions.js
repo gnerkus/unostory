@@ -233,7 +233,6 @@ export const toggleEditing = (chapterId, field) => {
 
 // Dialog actions.
 export const showDialog = ({
-  dialogType = 'info',
   noAction = null,
   noText = 'No',
   text,
@@ -241,7 +240,6 @@ export const showDialog = ({
   yesText = 'Yes',
 }) => {
   return {
-    dialogType,
     noAction,
     noText,
     text,

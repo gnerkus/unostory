@@ -19,6 +19,13 @@ module.exports = {
     modulesDirectories: ['node_modules', 'bower_components'],
   },
 
+  externals: {
+    cheerio: 'window',
+    jsdom: 'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true,
+  },
+
   module: {
     loaders: [
       {

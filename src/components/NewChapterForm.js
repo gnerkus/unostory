@@ -40,6 +40,7 @@ class NewChapterForm extends React.Component {
       onSubmit: PropTypes.func,
       title: PropTypes.string,
       content: PropTypes.string,
+      uid: PropTypes.string,
     };
   }
 

@@ -14,7 +14,6 @@ import IconButton from 'material-ui/IconButton/IconButton';
 import Avatar from 'material-ui/Avatar';
 
 import SocialPerson from 'material-ui/svg-icons/social/person';
-import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 
 import { grey300, darkBlack } from 'material-ui/styles/colors';
 
@@ -44,13 +43,6 @@ class Header extends React.Component {
       location: PropTypes.string,
       email: PropTypes.string,
       logout: PropTypes.func,
-    };
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
     };
   }
 
@@ -121,22 +113,6 @@ class Header extends React.Component {
     }
 
     return photo;
-  }
-
-  // Generate a menu button. This is used to open the side navigation.
-  navBtn() {
-    return (
-      <IconButton
-        tooltip="Nav menu"
-        onTouchTap={this.handleToggle.bind(this)}
-      >
-        <NavigationMenu />
-      </IconButton>
-    );
-  }
-
-  handleToggle() {
-    this.setState({ open: !this.state.open });
   }
 
   // Floating action button at the bottom right of the screen

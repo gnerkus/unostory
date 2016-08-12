@@ -10,6 +10,7 @@ import AppContainer from './containers/AppContainer';
 import MainContainer from './containers/MainContainer';
 import LoginFormContainer from './containers/LoginFormContainer';
 import NewChapterFormContainer from './containers/NewChapterFormContainer';
+import EditChapterFormContainer from './containers/EditChapterFormContainer';
 import ChapterContainer from './containers/ChapterContainer';
 
 import history from './history';
@@ -53,6 +54,12 @@ const routes = (
       <Route
         path="chapters/:chapterId"
         component={ChapterContainer}
+        onEnter={auth.checkAuth}
+      />
+
+      <Route
+        path="chapters/:chapterId/edit"
+        component={EditChapterFormContainer}
         onEnter={auth.checkAuth}
       />
     </Route>

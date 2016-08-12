@@ -1,10 +1,10 @@
 import firebase from 'firebase';
 
 const firebaseConf = {
-  apiKey: "AIzaSyC6HUOwcoU3X4Sb0K4tm9blnqy4nANoEcU",
-  authDomain: "scribe-4f238.firebaseapp.com",
-  databaseURL: "https://scribe-4f238.firebaseio.com",
-  storageBucket: "scribe-4f238.appspot.com"
+  apiKey: 'AIzaSyC6HUOwcoU3X4Sb0K4tm9blnqy4nANoEcU',
+  authDomain: 'scribe-4f238.firebaseapp.com',
+  databaseURL: 'https://scribe-4f238.firebaseio.com',
+  storageBucket: 'scribe-4f238.appspot.com',
 };
 firebase.initializeApp(firebaseConf);
 
@@ -20,18 +20,18 @@ const C = {
   FETCHING_CHAPTERS: 'FETCHING_CHAPTERS',
   FETCHED_CHAPTERS: 'FETCHED_CHAPTERS',
 
+  // Create chapter
   CREATING_NEW_CHAPTER: 'CREATING_NEW_CHAPTER',
-  REMOVE_CHAPTER: 'REMOVE_CHAPTER',
   CREATE_NEW_CHAPTER_SUCCESS: 'CREATE_NEW_CHAPTER_SUCCESS',
   CREATE_NEW_CHAPTER_FAILED: 'CREATE_NEW_CHAPTER_FAILED',
-  UPDATE_CHAPTER_VALUE: 'UPDATE_CHAPTER_VALUE',
-  UPDATE_CURRENT_CHAPTER_VALUE: 'UPDATE_CURRENT_CHAPTER_VALUE',
-  TOGGLE_EDITING_FIELD: 'TOGGLE_EDITING_FIELD',
 
-  // Editing field staatus.
-  FIELD_STATUS_LOADING: 'FIELD_STATUS_LOADING',
-  FIELD_STATUS_EDITING: 'FIELD_STATUS_EDITING',
-  FIELD_STATUS_NOT_EDITING: 'FIELD_STATUS_NOT_EDITING',
+  // Update chapter
+  UPDATE_CHAPTER: 'UPDATE_CHAPTER',
+  UPDATE_CHAPTER_SUCCESS: 'UPDATE_CHAPTER_SUCCESS',
+  UPDATE_CHAPTER_FAILED: 'UPDATE_CHAPTER_FAILED',
+
+  // Remove chapter
+  REMOVE_CHAPTER: 'REMOVE_CHAPTER',
 
   // New chapter status.
   CHAPTER_UNSAVED: 'CHAPTER_UNSAVED',

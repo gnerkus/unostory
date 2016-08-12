@@ -172,15 +172,6 @@ export const createNewChapter = (chapterDetails) => {
 };
 
 // Chapter action creator
-// Removed a chapter
-export const removeChapter = chapterId => {
-  return {
-    type: C.REMOVE_CHAPTER,
-    chapterId,
-  };
-};
-
-// Chapter action creator
 // Created a new chapter successfully
 export const createNewChapterSuccess = (chapterData) => {
   return {
@@ -198,36 +189,38 @@ export const createNewChapterFailed = (error) => {
   };
 };
 
-// Chapter action creator
-// Updated a chapter's field.
-export const updateChapterValue = (chapterId, field, value) => {
+// Updating chapter
+export const updateChapter = (chapterDetails, chapterId) => {
   return {
-    type: C.UPDATE_CHAPTER_VALUE,
+    type: C.UPDATE_CHAPTER,
+    chapterDetails,
     chapterId,
-    field,
-    value,
   };
 };
 
-// TODO: Remove this
 // Chapter action creator
-// Updated the current chapter's field.
-export const updateCurrentChapterValue = (field, value) => {
+// Updated a chapter successfully
+export const updateChapterSuccess = () => {
   return {
-    type: C.UPDATE_CURRENT_CHAPTER_VALUE,
-    field,
-    value,
+    type: C.UPDATE_CHAPTER_SUCCESS,
   };
 };
 
-// TODO: Remove this
-// Field action creator
-// Editing field
-export const toggleEditing = (chapterId, field) => {
+// Chapter action creator
+// Failed to update a chapter
+export const updateChapterFailed = (error) => {
   return {
-    type: C.TOGGLE_EDITING_FIELD,
+    type: C.UPDATE_CHAPTER_FAILED,
+    error,
+  };
+};
+
+// Chapter action creator
+// Removed a chapter
+export const removeChapter = chapterId => {
+  return {
+    type: C.REMOVE_CHAPTER,
     chapterId,
-    field,
   };
 };
 

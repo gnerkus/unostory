@@ -9,3 +9,6 @@ node_modules
 
 # Distribution files
 public
+
+# Test coverage files
+coverage

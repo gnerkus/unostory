@@ -6,7 +6,8 @@
   "scripts": {
     "watch": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --progress --colors --content-base public/",
     "build": "./node_modules/webpack/bin/webpack.js --progress --colors -p",
-    "deploy": "./node_modules/webpack/bin/webpack.js --progress --colors -p && firebase deploy"
+    "deploy": "./node_modules/webpack/bin/webpack.js --progress --colors -p && firebase deploy",
+    "test": "mocha -w --compilers js:babel-core/register test/helpers/browser.js test/**/*.spec.js"
   },
   "repository": {
     "type": "git",

@@ -38,6 +38,7 @@ class NewChapterForm extends React.Component {
     return {
       disabled: PropTypes.bool,
       onSubmit: PropTypes.func,
+      openFileDialog: PropTypes.func,
       title: PropTypes.string,
       content: PropTypes.string,
       uid: PropTypes.string,
@@ -79,6 +80,20 @@ class NewChapterForm extends React.Component {
                 secondary
                 type="submit"
               />
+              <FlatButton
+                label="Add sound"
+                secondary
+                onClick={() => {
+                  this.refs.fileUpload.click();
+                }}
+              >
+                <input
+                  name="music"
+                  ref="fileUpload"
+                  type="file"
+                  style={{ display: 'none' }}
+                />
+              </FlatButton>
             </CardActions>
           </Card>
           <input

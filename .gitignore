@@ -12,3 +12,6 @@ public
 
 # Test coverage files
 coverage
+
+# Lupa setting
+lupaProject.json
